@@ -142,6 +142,25 @@ body {
   opacity: 1;
 }
 
+.idchk {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.idchk input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #0088ff;
+  cursor: pointer;
+}
+
 .login-button {
   width: 100%;
   max-width: 340px;

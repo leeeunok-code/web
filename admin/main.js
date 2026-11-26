@@ -1,13 +1,29 @@
 const loginForm = document.getElementById("login-form");
 const idInput = document.getElementById("admin-id");
 const passwordInput = document.getElementById("admin-password");
+const rememberIdInput = document.getElementById("idchk");
 const feedbackEl = document.getElementById("login-feedback");
+const rememberedIdKey = "admin-username";
 
 const Adminid = "admin";
 const Passwd = "123456";
 
 const idFieldWrapper = idInput.closest(".input-field");
 const passwordFieldWrapper = passwordInput.closest(".input-field");
+
+const rememberedId = localStorage.getItem(rememberedIdKey);
+if (rememberedId) {
+  idInput.value = rememberedId;
+  rememberIdInput.checked = true;
+}
+
+function updateRememberedId() {
+  if (rememberIdInput.checked && idInput.value.trim()) {
+    localStorage.setItem(rememberedIdKey, idInput.value.trim());
+  } else {
+    localStorage.removeItem(rememberedIdKey);
+  }
+}
 
 function clearErrors() {
   idFieldWrapper.classList.remove("is-error");
@@ -32,7 +48,10 @@ function hideFeedback() {
 idInput.addEventListener("input", () => {
   idFieldWrapper.classList.remove("is-error");
   if (!feedbackEl.hidden) hideFeedback();
+  updateRememberedId();
 });
+
+rememberIdInput.addEventListener("change", updateRememberedId);
 
 passwordInput.addEventListener("input", () => {
   passwordFieldWrapper.classList.remove("is-error");
